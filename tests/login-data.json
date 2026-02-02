@@ -1,7 +1,7 @@
 {
   "validLogin": {
-    "email": "suraj.prajapati@algosoftware.com",
-    "password": "Suraj@1994",
+    "email": "xyz@abc.com",
+    "password": "xyz@abc",
     "expected": "Hello"
   },
   "invalidLogins": [
