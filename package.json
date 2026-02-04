@@ -10,7 +10,9 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.9"
+    "@types/node": "^25.0.9",
+    "docx": "^9.5.1",
+    "markdown-to-txt": "^2.0.1"
   },
   "dependencies": {
     "xlsx": "^0.18.5"

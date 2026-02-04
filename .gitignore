@@ -10,3 +10,4 @@ session.json
 companies_data.xlsx
 .playwright-mcp/
 properties.json
+tests/login-data.json

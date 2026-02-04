@@ -32,6 +32,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    headless: false,
   },
 
   /* Configure projects for major browsers */
@@ -40,7 +42,7 @@ export default defineConfig({
     //   name: 'chrome',
     //   use: {
     //     browserName: 'chromium',
-    //     channel: 'chrome', // 👈 uses local Google Chrome
+    //     channel: 'chrome', // uses local Google Chrome
     //     headless: false,
     //   },
     // },
