@@ -1,6 +1,7 @@
 import { test, expect } from '../utils/BaseTest';
 import { TestDataLoader } from '../utils/TestDataLoader';
 import { LoginPage } from '../pages/LoginPage';
+import { Environment } from '../utils/Environment';
 
 interface InvalidLoginScenario {
   description: string;
@@ -60,7 +61,7 @@ test('should attempt login for valid credentials format', async ({ page }) => {
   // Check the expected result
   if (testData.validLogin.expected === 'success') {
     // On successful login, should redirect to coremasters site
-    await expect(page).toHaveURL('https://coremasters.algorithms.com/');
+    await expect(page).toHaveURL(Environment.getAppUrl());
   } else {
     // For invalid, expect error message
     await expect(page.getByText(testData.validLogin.expected).first()).toBeVisible();

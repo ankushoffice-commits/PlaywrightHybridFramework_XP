@@ -1,8 +1,9 @@
 import { Page, expect } from '@playwright/test';
+import { Environment } from '../utils/Environment';
 
 export class MainPage {
   private page: Page;
-  private readonly url = 'https://coremasters.algorithms.com/';
+  private readonly url = Environment.getAppUrl();
 
   constructor(page: Page) {
     this.page = page;

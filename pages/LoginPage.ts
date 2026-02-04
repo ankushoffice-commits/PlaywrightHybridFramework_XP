@@ -1,8 +1,9 @@
 import { Page } from '@playwright/test';
+import { Environment } from '../utils/Environment';
 
 export class LoginPage {
   private page: Page;
-  private readonly url = 'https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F';
+  private readonly url = Environment.getLoginUrl();
 
   constructor(page: Page) {
     this.page = page;
