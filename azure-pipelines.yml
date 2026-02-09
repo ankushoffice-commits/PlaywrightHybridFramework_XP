@@ -10,7 +10,7 @@ steps:
 
 - task: NodeTool@0
   inputs:
-    versionSpec: 'lts/*'
+    versionSpec: '20.x'
   displayName: 'Install Node.js'
 
 - script: npm ci
