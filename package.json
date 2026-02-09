@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "loginTest": "npx playwright test tests/1 - login.spec.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

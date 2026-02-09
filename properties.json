@@ -1,0 +1,17 @@
+{
+  "stage": "predeployment",
+  "comment": "Configuration for env stages can be set above.",
+  
+  "predeployment": {
+    "loginUrl": "https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F",
+    "appUrl": "https://coremasters.algorithms.com/"
+  },
+  "postdeployment": {
+    "loginUrl": "https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F",
+    "appUrl": "https://coremasters.algorithms.com/"
+  },
+  "uat": {
+    "loginUrl": "https://identity-uat.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters-uat.algorithms.com%2F",
+    "appUrl": "https://coremasters-uat.algorithms.com/"
+  }
+}
