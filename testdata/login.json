@@ -1,0 +1,39 @@
+{
+  "validLogin": {
+    "email": "suraj.prajapati@algosoftware.com",
+    "password": "Suraj@1994",
+    "expected": "Hello"
+  },
+  "invalidLogins": [
+    {
+      "description": "empty email and password",
+      "email": "",
+      "password": "",
+      "expectedErrors": ["The Email field is required.", "The Password field is required."]
+    },
+    {
+      "description": "empty email",
+      "email": "",
+      "password": "password123",
+      "expectedErrors": ["The Email field is required."]
+    },
+    {
+      "description": "empty password",
+      "email": "test@example.com",
+      "password": "",
+      "expectedErrors": ["The Password field is required."]
+    },
+    {
+      "description": "invalid email format",
+      "email": "invalid-email",
+      "password": "password123",
+      "expectedErrors": ["The Email field is not a valid e-mail address."]
+    },
+    {
+      "description": "invalid credentials",
+      "email": "wrong@example.com",
+      "password": "wrongpassword",
+      "expectedErrors": ["Error: Invalid login attempt."]
+    }
+  ]
+}

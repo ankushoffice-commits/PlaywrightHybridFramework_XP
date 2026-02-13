@@ -3,7 +3,7 @@ import * as path from 'path';
 
 export class TestDataLoader {
   static loadData<T>(fileName: string): T {
-    const filePath = path.join(__dirname, '..', 'tests', fileName);
+    const filePath = path.join(__dirname, '..', 'testdata', fileName);
     try {
       const data = fs.readFileSync(filePath, 'utf-8');
       return JSON.parse(data);

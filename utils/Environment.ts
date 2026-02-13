@@ -19,10 +19,7 @@ export class Environment {
   private static cachedConfig: EnvironmentConfig | null = null;
 
   private static loadConfig(): EnvironmentConfig {
-    if (this.cachedConfig) {
-      return this.cachedConfig;
-    }
-
+    // Always reload for development
     const configPath = path.resolve(__dirname, '..', 'properties.json');
     const raw = fs.readFileSync(configPath, 'utf-8');
     this.cachedConfig = JSON.parse(raw) as EnvironmentConfig;

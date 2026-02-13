@@ -32,8 +32,8 @@ export class MainPage {
   }
 
   async navigateToCompany() {
-    await this.page.getByRole('link', { name: 'Company' }).waitFor();
-    await this.page.getByRole('link', { name: 'Company' }).click();
+    await this.page.getByText('Company').waitFor();
+    await this.page.getByText('Company').click();
     await expect(this.page).toHaveURL(/CompanyTrial/);
   }
 

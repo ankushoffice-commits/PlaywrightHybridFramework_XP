@@ -5,7 +5,7 @@ import { MainPage } from '../pages/MainPage';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
-}>('login-data.json');
+}>('login.json');
 
 // Test to login and save session
 test('login and save session', async ({ browser }) => {

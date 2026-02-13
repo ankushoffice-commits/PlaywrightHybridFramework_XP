@@ -21,7 +21,7 @@ interface TestData {
   invalidLogins: InvalidLoginScenario[];
 }
 
-const testData: TestData = TestDataLoader.loadData<TestData>('login-data.json');
+const testData: TestData = TestDataLoader.loadData<TestData>('login.json');
 
 test('should display login form elements', async ({ page }) => {
   const loginPage = new LoginPage(page);
