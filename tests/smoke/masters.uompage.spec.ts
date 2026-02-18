@@ -10,15 +10,6 @@ const testData = TestDataLoader.loadData<{
 test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () => {
   let consoleMessages: string[] = [];
 
-  test.beforeEach(async ({ page }) => {
-    // Attach console listener before grid loads (MANDATORY for console metadata rule)
-    page.on('console', (msg) => {
-      consoleMessages.push(msg.text());
-    });
-    // Clear messages for each test
-    consoleMessages = [];
-  });
-
   test('UOM-001: Grid loading and initial state validation', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,
@@ -198,6 +189,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate to UOM page
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
     await page.waitForLoadState('load');
@@ -270,6 +266,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate and setup
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
     await page.waitForLoadState('load');
@@ -336,6 +337,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
       testData.validLogin.password
     );
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
 
     // Navigate and setup
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
@@ -406,6 +412,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate and setup
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
     await page.waitForLoadState('load');
@@ -471,6 +482,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate and setup
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
     await page.waitForLoadState('load');
@@ -532,6 +548,11 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
       testData.validLogin.password
     );
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
 
     // Navigate and setup
     await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');

@@ -10,13 +10,6 @@ const testData = TestDataLoader.loadData<{
 test.describe('Company Trial Management - DevExpress Grid Validation', () => {
   let consoleMessages: string[] = [];
 
-  test.beforeEach(async ({ page }) => {
-    // Attach console listener before grid loads (MANDATORY for console metadata rule)
-    page.on('console', (msg) => {
-      consoleMessages.push(msg.text());
-    });
-  });
-
   test('should validate DevExpress grid with CSS injection and console metadata', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,
@@ -108,6 +101,12 @@ test.describe('Company Trial Management - DevExpress Grid Validation', () => {
   test('should display and validate grid data correctly', async ({ browser }) => {
     const context = await SessionManager.loadAuthenticatedSession(browser);
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     const mainPage = new MainPage(page);
 
     await mainPage.goto();
@@ -168,6 +167,12 @@ test.describe('Company Trial Management - DevExpress Grid Validation', () => {
   test('should handle New Company creation flow', async ({ browser }) => {
     const context = await SessionManager.loadAuthenticatedSession(browser);
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     const mainPage = new MainPage(page);
 
     await mainPage.goto();
@@ -228,6 +233,12 @@ test.describe('Company Trial Management - DevExpress Grid Validation', () => {
   test('should handle grid filtering operations', async ({ browser }) => {
     const context = await SessionManager.loadAuthenticatedSession(browser);
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     const mainPage = new MainPage(page);
 
     await mainPage.goto();
@@ -292,6 +303,12 @@ test.describe('Company Trial Management - DevExpress Grid Validation', () => {
   test('should validate export and import operations', async ({ browser }) => {
     const context = await SessionManager.loadAuthenticatedSession(browser);
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     const mainPage = new MainPage(page);
 
     await mainPage.goto();

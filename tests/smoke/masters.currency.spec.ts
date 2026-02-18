@@ -10,13 +10,6 @@ const testData = TestDataLoader.loadData<{
 test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation', () => {
   let consoleMessages: string[] = [];
 
-  test.beforeEach(async ({ page }) => {
-    // Attach console listener before grids load (MANDATORY for console metadata rule)
-    page.on('console', (msg) => {
-      consoleMessages.push(msg.text());
-    });
-  });
-
   test('should validate dual DevExpress grids with CSS injection and console metadata', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,
@@ -134,6 +127,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
     await page.waitForLoadState('networkidle');
@@ -210,6 +208,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
     await page.waitForLoadState('networkidle');
@@ -270,6 +273,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
       testData.validLogin.password
     );
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
 
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
@@ -343,6 +351,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     );
     const page = await context.newPage();
 
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
+
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
     await page.waitForLoadState('networkidle');
@@ -406,6 +419,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
       testData.validLogin.password
     );
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
 
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
@@ -475,6 +493,11 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
       testData.validLogin.password
     );
     const page = await context.newPage();
+
+    // Attach console listener
+    page.on('console', (msg) => {
+      consoleMessages.push(msg.text());
+    });
 
     // Navigate to Currency page
     await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
