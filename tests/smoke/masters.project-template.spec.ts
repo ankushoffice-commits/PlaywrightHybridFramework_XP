@@ -2,6 +2,7 @@ import { test, expect } from '../../utils/BaseTest';
 import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
 import { MainPage } from '../../pages/MainPage';
+import properties from '../../properties.json';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
@@ -24,7 +25,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     });
 
     // Navigate directly to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // MANDATORY: Inject CSS to disable DevExpress virtualization for BOTH grids
@@ -127,7 +128,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     const page = await context.newPage();
 
     // Navigate to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -180,7 +181,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     const page = await context.newPage();
 
     // Navigate to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -241,7 +242,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     const page = await context.newPage();
 
     // Navigate to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Verify main page toolbar buttons
@@ -297,7 +298,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     const page = await context.newPage();
 
     // Navigate to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -355,7 +356,7 @@ test.describe('Project Templates Management - DevExpress Dual Grid Validation', 
     const page = await context.newPage();
 
     // Navigate to Project Templates page
-    await page.goto('https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters');
+    await page.goto(properties.predeployment.projectTemplatesPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization

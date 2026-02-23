@@ -8,14 +8,14 @@ const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
 }>('login.json');
 
-test.describe('Approval Region Master - DevExpress Grid Validation', () => {
+test.describe('Milestones Master - DevExpress Grid Validation', () => {
   let consoleMessages: string[] = [];
 
   test.beforeEach(() => {
     consoleMessages = [];
   });
 
-  test('should validate page load and navigation to Approval Region master', async ({ browser }) => {
+  test('should validate page load and navigation to Milestones master', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,
       testData.validLogin.email,
@@ -28,12 +28,12 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
       consoleMessages.push(msg.text());
     });
 
-    // Navigate directly to Approval Region page
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    // Navigate directly to Milestones page
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Verify page elements
-    await expect(page.getByRole('heading', { name: 'Approval Regions' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Milestones' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Menu' })).toBeVisible();
     
     // Verify breadcrumb navigation
@@ -55,8 +55,8 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
       consoleMessages.push(msg.text());
     });
 
-    // Navigate to Approval Region page
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    // Navigate to Milestones page
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // MANDATORY: Inject CSS to disable DevExpress virtualization before validation
@@ -131,9 +131,9 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     expect(consoleRowCount).toBe(actualCounts.rowCount);
     expect(consoleColumnCount).toBe(actualCounts.columnCount);
 
-    // Verify minimum expected structure (actual data shows 9 rows and 6 columns)
-    expect(actualCounts.rowCount).toBeGreaterThanOrEqual(6);
-    expect(actualCounts.columnCount).toBeGreaterThanOrEqual(5);
+    // Verify minimum expected structure (actual data shows 4 rows and 10 columns)
+    expect(actualCounts.rowCount).toBeGreaterThanOrEqual(3);
+    expect(actualCounts.columnCount).toBeGreaterThanOrEqual(9);
 
     console.log(`Actual grid structure: ${actualCounts.rowCount} rows and ${actualCounts.columnCount} columns`);
 
@@ -148,7 +148,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     );
     const page = await context.newPage();
 
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -178,9 +178,13 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
 
     // Verify all required column headers
     await expect(page.getByRole('columnheader', { name: 'Selection' })).toBeVisible();
-    await expect(page.getByRole('columnheader', { name: 'Approval Region Code' })).toBeVisible();
-    await expect(page.getByRole('columnheader', { name: 'Region Name' })).toBeVisible();
-    await expect(page.getByRole('columnheader', { name: 'Currency Code' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Seq No.' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Code' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Name' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Internal/External' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Nature' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Procurement Plan' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Lead Time Driven' })).toBeVisible();
     await expect(page.getByRole('columnheader', { name: 'Deactivate' })).toBeVisible();
 
     // Verify add new row functionality
@@ -189,7 +193,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     await context.close();
   });
 
-  test('should validate sample data content in grid rows', async ({ browser }) => {
+  test('should validate milestone data content in grid rows', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,
       testData.validLogin.email,
@@ -197,7 +201,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     );
     const page = await context.newPage();
 
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection
@@ -220,34 +224,43 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
 
     // Wait for grid stabilization
     await page.waitForFunction(() => {
-      const rows = document.querySelectorAll('[role="treegrid"] [role="row"]');
-      return rows.length >= 6;
+      const rows = document.querySelectorAll('[role="treegrid"] [role="row"], tbody tr');
+      return rows.length >= 3; // At least header + some data rows
     });
 
-    // Verify specific region data using more specific gridcell selectors
-    await expect(page.getByRole('gridcell', { name: 'IN', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'INDIA' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'INR' })).toBeVisible();
+    // Verify specific milestone sequence and identification data using gridcell selectors
+    // Check for sequence numbers - be flexible as data may change
+    const seqNumbers = ['90', '91', '93'];
+    let visibleSeqCount = 0;
+    for (const seq of seqNumbers) {
+      const seqCell = page.getByRole('gridcell', { name: seq, exact: true });
+      if (await seqCell.count() > 0) {
+        await expect(seqCell).toBeVisible();
+        visibleSeqCount++;
+      }
+    }
+    expect(visibleSeqCount).toBeGreaterThan(0); // At least some sequence numbers should be visible
 
-    await expect(page.getByRole('gridcell', { name: 'OM', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'OMAN' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'OMR' })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'Test32' })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'Test33' })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'test', exact: true })).toBeVisible();
 
-    await expect(page.getByRole('gridcell', { name: 'QTR', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'QATAR' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'QR', exact: true })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'Test name' }).first()).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'tttt' })).toBeVisible();
 
-    await expect(page.getByRole('gridcell', { name: 'SA', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'Saudi Arabia' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'SAR' })).toBeVisible();
+    // Verify Internal/External classification
+    const externalCells = page.getByRole('gridcell', { name: 'External' });
+    await expect(externalCells.first()).toBeVisible();
 
-    await expect(page.getByRole('gridcell', { name: 'UA', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'UNITED ARAB EMIRATES' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'AED' })).toBeVisible();
+    // Verify Nature values
+    await expect(page.getByRole('gridcell', { name: 'Post Order' })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'Pre Order' }).first()).toBeVisible();
 
-    await expect(page.getByRole('gridcell', { name: 'US', exact: true })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'United States' })).toBeVisible();
-    await expect(page.getByRole('gridcell', { name: 'USD' })).toBeVisible();
+    // Verify Procurement Plan and Lead Time Driven values
+    const yesCells = page.getByRole('gridcell', { name: 'Yes', exact: true });
+    const noCells = page.getByRole('gridcell', { name: 'No', exact: true });
+    await expect(yesCells.first()).toBeVisible();
+    await expect(noCells.first()).toBeVisible();
 
     await context.close();
   });
@@ -260,7 +273,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     );
     const page = await context.newPage();
 
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Verify main toolbar buttons
@@ -303,7 +316,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     );
     const page = await context.newPage();
 
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection
@@ -334,17 +347,21 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     const hasStatusBar = await page.locator('[role="status"], .status-bar').count() > 0;
     
     if (hasStatusBar) {
-      // Verify initial status bar
-      await expect(page.getByText('Data grid with 6 rows and 5 columns')).toBeVisible();
+      // Verify initial status bar - flexible check for actual grid dimensions
+      const statusText = await page.locator('[role="status"]').first().textContent();
+      expect(statusText).toContain('Data grid with');
+      expect(statusText).toContain('rows and');
+      expect(statusText).toContain('columns');
+      
       await expect(page.getByText('0 rows are selected')).toBeVisible();
     }
 
-    // Test individual row selection - try multiple selector strategies
-    let firstRowCheckbox = page.locator('[role="row"]:has([role="gridcell"]:text-is("IN")) input[type="checkbox"]').first();
+    // Test individual row selection - try multiple selector strategies for milestone data
+    let firstRowCheckbox = page.locator('[role="row"]:has([role="gridcell"]:text-is("90")) input[type="checkbox"]').first();
     
-    // If that doesn't work, try alternative selector
+    // If that doesn't work, try alternative selector for Test32
     if (await firstRowCheckbox.count() === 0) {
-      firstRowCheckbox = page.locator('tr:has(td:text-is("IN")) input[type="checkbox"]').first();
+      firstRowCheckbox = page.locator('[role="row"]:has([role="gridcell"]:text-is("Test32")) input[type="checkbox"]').first();
     }
     
     // If still not found, try more general selector
@@ -368,12 +385,93 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     const isDeleteEnabled = await deleteButton.isEnabled();
     
     if (!isDeleteEnabled) {
-      console.log('Delete button remains disabled - this might be expected behavior');
+      console.log('Delete button remains disabled - this might be expected behavior for Milestones');
       // Just verify the button exists instead of checking if it's enabled
       await expect(deleteButton).toBeVisible();
     } else {
       await expect(deleteButton).toBeEnabled();
     }
+
+    await context.close();
+  });
+
+  test('should validate milestone data fields configuration', async ({ browser }) => {
+    const context = await SessionManager.createAuthenticatedSession(
+      browser,
+      testData.validLogin.email,
+      testData.validLogin.password
+    );
+    const page = await context.newPage();
+
+    await page.goto(properties.predeployment.milestonesUrl);
+    await page.waitForLoadState('networkidle');
+
+    // Apply CSS injection
+    await page.addStyleTag({ 
+      content: `
+        .dxbl-grid-scroll-container, 
+        .dxbl-scroll-viewer, 
+        .dxbl-scroll-viewer-content { 
+            height: auto !important; 
+            max-height: none !important; 
+            overflow: visible !important; 
+            display: block !important;
+        }
+        
+        .dxbl-grid {
+            height: auto !important;
+        }
+      ` 
+    });
+
+    // Wait for grid stabilization
+    await page.waitForFunction(() => {
+      const rows = document.querySelectorAll('[role="treegrid"] [role="row"], tbody tr');
+      return rows.length >= 3;
+    });
+
+    // Validate milestone configuration fields
+    // Verify sequence numbers are properly ordered - be flexible as data may change
+    const seqNumbers = ['90', '91', '93'];
+    let visibleSeqCount = 0;
+    for (const seq of seqNumbers) {
+      const seqCell = page.getByRole('gridcell', { name: seq, exact: true });
+      if (await seqCell.count() > 0) {
+        await expect(seqCell).toBeVisible();
+        visibleSeqCount++;
+      }
+    }
+    expect(visibleSeqCount).toBeGreaterThan(0); // At least some sequence numbers should be visible
+
+    // Verify milestone codes and names
+    const milestoneData = [
+      { code: 'Test32', exact: false },
+      { code: 'Test33', exact: false },
+      { code: 'test', exact: true }
+    ];
+
+    for (const milestone of milestoneData) {
+      await expect(page.getByRole('gridcell', { name: milestone.code, exact: milestone.exact })).toBeVisible();
+    }
+
+    // Verify names separately to handle duplicates
+    await expect(page.getByRole('gridcell', { name: 'Test name' }).first()).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'tttt' })).toBeVisible();
+
+    // Verify all entries show External classification
+    const externalCells = await page.getByRole('gridcell', { name: 'External' }).count();
+    expect(externalCells).toBeGreaterThanOrEqual(3); // At least 3 entries should be External
+
+    // Verify Nature values (Post Order and Pre Order)
+    await expect(page.getByRole('gridcell', { name: 'Post Order' })).toBeVisible();
+    await expect(page.getByRole('gridcell', { name: 'Pre Order' }).first()).toBeVisible();
+
+    // Verify Deactivate column exists and has content
+    await expect(page.getByRole('columnheader', { name: 'Deactivate' })).toBeVisible();
+    
+    // Check if there are any checkboxes in the grid (deactivate column may have them)
+    const hasCheckboxes = await page.locator('input[type="checkbox"]').count() > 0;
+    expect(hasCheckboxes).toBe(true); // Should have some checkboxes in the grid
 
     await context.close();
   });
@@ -386,7 +484,7 @@ test.describe('Approval Region Master - DevExpress Grid Validation', () => {
     );
     const page = await context.newPage();
 
-    await page.goto(properties.predeployment.approvalRegionUrl);
+    await page.goto(properties.predeployment.milestonesUrl);
     await page.waitForLoadState('networkidle');
 
     // Enter edit mode

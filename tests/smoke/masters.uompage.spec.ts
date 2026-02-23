@@ -2,6 +2,7 @@ import { test, expect } from '../../utils/BaseTest';
 import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
 import { MainPage } from '../../pages/MainPage';
+import properties from '../../properties.json';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
@@ -24,7 +25,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate directly to UOM page
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     
     // Wait for page load completion
     await page.waitForLoadState('load');
@@ -104,7 +105,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate to UOM page
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -195,7 +196,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate to UOM page
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -272,7 +273,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate and setup
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -344,7 +345,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate and setup
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -418,7 +419,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate and setup
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -488,7 +489,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate and setup
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 
@@ -555,7 +556,7 @@ test.describe('Unit Of Measure (UOM) Masters - DevExpress Grid Validation', () =
     });
 
     // Navigate and setup
-    await page.goto('https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters');
+    await page.goto(properties.predeployment.uomPageUrl);
     await page.waitForLoadState('load');
     await page.waitForTimeout(2000);
 

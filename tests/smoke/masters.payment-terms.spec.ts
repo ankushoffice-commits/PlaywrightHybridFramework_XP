@@ -1,6 +1,7 @@
 import { test, expect } from '../../utils/BaseTest';
 import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
+import properties from '../../properties.json';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
@@ -23,7 +24,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
     });
 
     // Navigate directly to Payment Terms page
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Validate page load and main heading
@@ -58,7 +59,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
     });
 
     // Navigate to Payment Terms page
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // MANDATORY: Inject CSS to disable DevExpress virtualization before validation
@@ -124,7 +125,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -176,7 +177,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -232,7 +233,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection
@@ -298,7 +299,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection
@@ -362,7 +363,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection
@@ -415,7 +416,7 @@ test.describe('Payment Terms Master Management - DevExpress Grid Validation', ()
       consoleMessages.push(msg.text());
     });
 
-    await page.goto('https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters');
+    await page.goto(properties.predeployment.paymentTermsPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection

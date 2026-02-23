@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "loginTest": "npx playwright test tests/1.login.spec.ts",
-    "smokeTests": "npx playwright test tests/smoke/"
+    "smokeTests": "npx playwright test tests/smoke/ --headed",
+    "smokeTestsHeadless": "npx playwright test tests/smoke/"
   },
   "keywords": [],
   "author": "",

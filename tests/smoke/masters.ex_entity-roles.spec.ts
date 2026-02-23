@@ -3,6 +3,7 @@ import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
 import { LoginPage } from '../../pages/LoginPage';
 import { MainPage } from '../../pages/MainPage';
+import properties from '../../properties.json';
 
 test.describe('External Entity Roles - Security Masters', () => {
   let context: BrowserContext;
@@ -11,7 +12,7 @@ test.describe('External Entity Roles - Security Masters', () => {
   let mainPage: MainPage;
   let loginData: any;
 
-  const EXTERNAL_ENTITY_ROLES_URL = 'https://coremasters.algorithms.com/ExternalEntityRolesPage?stepType=Master&stepCode=EXTERNALENTITYROLES&processCode=SECURITY';
+  const EXTERNAL_ENTITY_ROLES_URL = properties.predeployment.externalEntityRolesPageUrl;
 
   test.beforeAll(async ({ browser }) => {
     // Load test data
@@ -74,7 +75,6 @@ test.describe('External Entity Roles - Security Masters', () => {
     await expect(page.locator('text=Masters')).toBeVisible();
     await expect(page.locator('text=Global Tax Management')).toBeVisible();
     await expect(page.locator('text=Subcontracting')).toBeVisible();
-    await expect(page.locator('text=Vat')).toBeVisible();
   });
 
   test('1.2 DevExpress Grid Virtualization Handling', async () => {

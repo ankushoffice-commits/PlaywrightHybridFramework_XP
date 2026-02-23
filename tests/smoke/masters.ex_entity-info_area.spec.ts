@@ -2,6 +2,7 @@ import { test, expect } from '../../utils/BaseTest';
 import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
 import { MainPage } from '../../pages/MainPage';
+import properties from '../../properties.json';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
@@ -24,7 +25,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     });
 
     // Navigate directly to External Entity Info Area page
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
     
     // Verify page loads successfully
     await expect(page).toHaveURL(/ExternalEntityInfoArea/);
@@ -119,7 +120,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     const page = await context.newPage();
 
     // Navigate to External Entity Info Area
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
     
     // Verify URL parameters are correct
     expect(page.url()).toContain('stepType=Master');
@@ -152,7 +153,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     );
     const page = await context.newPage();
 
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
 
     // MANDATORY: Disable grid virtualization
     await page.addStyleTag({ 
@@ -198,7 +199,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     );
     const page = await context.newPage();
 
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
 
     // MANDATORY: Disable grid virtualization
     await page.addStyleTag({ 
@@ -308,7 +309,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     );
     const page = await context.newPage();
 
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
 
     // MANDATORY: Disable grid virtualization
     await page.addStyleTag({ 
@@ -371,7 +372,7 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     );
     const page = await context.newPage();
 
-    await page.goto('https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY');
+    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
 
     // MANDATORY: Disable grid virtualization
     await page.addStyleTag({ 

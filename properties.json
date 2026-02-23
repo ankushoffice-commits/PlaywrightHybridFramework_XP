@@ -4,14 +4,22 @@
   
   "predeployment": {
     "loginUrl": "https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F",
-    "appUrl": "https://coremasters.algorithms.com/"
+    "appUrl": "https://coremasters.algorithms.com/",
+    "milestonesUrl": "https://coremasters.algorithms.com/ENQMILESTONE?stepType=Master&stepCode=ENQMILESTONE&processCode=Masters",
+    "approvalRegionUrl": "https://coremasters.algorithms.com/ApprovalRegionPage/?stepType=Master&stepCode=APPROVALREGION&processCode=SECURITY",
+    "currencyPageUrl": "https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters",
+    "externalEntityInfoAreaPageUrl": "https://coremasters.algorithms.com/ExternalEntityInfoArea?stepType=Master&stepCode=EXTENTITYRELATED&processCode=SECURITY",
+    "externalEntityRolesPageUrl": "https://coremasters.algorithms.com/ExternalEntityRolesPage?stepType=Master&stepCode=EXTERNALENTITYROLES&processCode=SECURITY",
+    "paymentTermsPageUrl": "https://coremasters.algorithms.com/PaymentTermsPage/?stepType=Master&stepCode=PAYTERMS&processCode=Masters",
+    "projectTemplatesPageUrl": "https://coremasters.algorithms.com/ProjectTemplatesPage?stepType=Master&stepCode=PROJTEMPLATE&processCode=Masters",
+    "uomPageUrl": "https://coremasters.algorithms.com/UomPage?stepName=Unit%20Of%20Measure&stepType=Master&stepCode=Uom&processCode=Masters"
   },
   "postdeployment": {
-    "loginUrl": "https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F",
-    "appUrl": "https://coremasters.algorithms.com/"
+    "loginUrl": "",
+    "appUrl": ""
   },
   "uat": {
-    "loginUrl": "https://identity-uat.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters-uat.algorithms.com%2F",
-    "appUrl": "https://coremasters-uat.algorithms.com/"
+    "loginUrl": "",
+    "appUrl": ""
   }
 }

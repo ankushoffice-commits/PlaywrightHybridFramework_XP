@@ -2,6 +2,7 @@ import { test, expect } from '../../utils/BaseTest';
 import { SessionManager } from '../../utils/SessionManager';
 import { TestDataLoader } from '../../utils/TestDataLoader';
 import { MainPage } from '../../pages/MainPage';
+import properties from '../../properties.json';
 
 const testData = TestDataLoader.loadData<{
   validLogin: { email: string; password: string; expected: string };
@@ -24,7 +25,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate directly to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // MANDATORY: Inject CSS to disable DevExpress virtualization for BOTH grids
@@ -133,7 +134,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for both grids stabilization
@@ -214,7 +215,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -280,7 +281,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -357,7 +358,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -426,7 +427,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
@@ -500,7 +501,7 @@ test.describe('Currencies and Exchange Rates - DevExpress Dual Grid Validation',
     });
 
     // Navigate to Currency page
-    await page.goto('https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters');
+    await page.goto(properties.predeployment.currencyPageUrl);
     await page.waitForLoadState('networkidle');
 
     // Apply CSS injection for grid stabilization
