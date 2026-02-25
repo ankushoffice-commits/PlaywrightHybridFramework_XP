@@ -24,12 +24,14 @@ export default defineConfig({
   // workers: process.env.CI ? 1 : undefined,
   workers: 10,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    
-    browserName: 'chromium',
+
     ignoreHTTPSErrors: true,
+
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
@@ -52,17 +54,23 @@ export default defineConfig({
     // },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+       },
     },
 
     // {
     //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
+    //   use: { ...devices['Desktop Firefox'],
+    //     viewport: { width: 1920, height: 1080 },
+    //    },
     // },
 
     // {
     //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
+    //   use: { ...devices['Desktop Safari'],
+    //     viewport: { width: 1920, height: 1080 },
+    //    },
     // },
 
     /* Test against mobile viewports. */
