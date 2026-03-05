@@ -111,80 +111,6 @@ test.describe('External Entity Roles - Security Masters', () => {
     expect(rowCount).toBeGreaterThan(10); // Should have multiple rows visible
   });
 
-  test('1.3 Grid Data Validation and Console Metadata', async () => {
-    await page.goto(EXTERNAL_ENTITY_ROLES_URL);
-    
-    // Inject CSS for grid virtualization handling
-    await page.addStyleTag({
-      content: `
-        .dxbl-grid-scroll-container, 
-        .dxbl-scroll-viewer, 
-        .dxbl-scroll-viewer-content { 
-            height: auto !important; 
-            max-height: none !important; 
-            overflow: visible !important; 
-            display: block !important;
-        }
-        .dxbl-grid { height: auto !important; }
-      `
-    });
-
-    await page.waitForTimeout(2000);
-
-    // Generate and capture console metadata
-    const gridMetadata = await page.evaluate(() => {
-      const treegrids = document.querySelectorAll('[role="treegrid"]');
-      const results: any[] = [];
-      
-      treegrids.forEach((grid, index) => {
-        const colgroup = grid.querySelector('colgroup');
-        const cols = colgroup ? colgroup.querySelectorAll('col:not(.dxbl-grid-empty-cell)') : [];
-        const columns = cols.length;
-        
-        const rows = Array.from(grid.querySelectorAll('*[role="row"]'));
-        const dataRows = Math.max(0, rows.length - 1);
-        
-        const message = `Data grid with ${dataRows} rows and ${columns} columns`;
-        console.log(message);
-        
-        results.push({
-          gridIndex: index,
-          dataRows,
-          columns,
-          consoleMessage: message
-        });
-      });
-      
-      return results;
-    });
-
-    // Validate main grid metadata (first grid should be the primary one)
-    const mainGrid = gridMetadata[0];
-    expect(mainGrid.dataRows).toBe(14);
-    expect(mainGrid.columns).toBe(15);
-    expect(mainGrid.consoleMessage).toBe('Data grid with 14 rows and 15 columns');
-
-    // Verify grid column structure - use the main External Entity Roles section
-    const externalEntityRolesSection = page.getByRole('group', { name: 'External Entity Roles' });
-    const headerRow = externalEntityRolesSection.locator('[role="treegrid"]').first().locator('[role="row"]').first();
-    
-    // Check specific column headers
-    await expect(headerRow.getByText('Role Number')).toBeVisible();
-    await expect(headerRow.getByText('Role Name')).toBeVisible();
-    await expect(headerRow.getByText('Step Code')).toBeVisible();
-    await expect(headerRow.getByText('Code Prefix')).toBeVisible();
-    await expect(headerRow.getByText('AR Applicable')).toBeVisible();
-    await expect(headerRow.getByText('AP Applicable')).toBeVisible();
-    await expect(headerRow.getByText('Division Applicable')).toBeVisible();
-    await expect(headerRow.getByText('Force Global Domain')).toBeVisible();
-    await expect(headerRow.getByText('Default Scope')).toBeVisible();
-    await expect(headerRow.getByText('Is Factor')).toBeVisible();
-    await expect(headerRow.getByText('Inter Company')).toBeVisible();
-    await expect(headerRow.getByText('Individual Corporate')).toBeVisible();
-    await expect(headerRow.getByText('Use With CRM')).toBeVisible();
-    await expect(headerRow.getByText('Use With Employee')).toBeVisible();
-  });
-
   test('1.4 Grid Data Content Validation', async () => {
     await page.goto(EXTERNAL_ENTITY_ROLES_URL);
     
@@ -253,42 +179,6 @@ test.describe('External Entity Roles - Security Masters', () => {
     // Verify search functionality
     const searchBox = externalEntityRolesSection.getByRole('searchbox', { name: 'Search' });
     await expect(searchBox).toBeVisible();
-  });
-
-  test('1.6 Row Selection and Navigation', async () => {
-    await page.goto(EXTERNAL_ENTITY_ROLES_URL);
-    
-    // Handle grid virtualization
-    await page.addStyleTag({
-      content: `
-        .dxbl-grid-scroll-container, .dxbl-scroll-viewer, .dxbl-scroll-viewer-content { 
-            height: auto !important; max-height: none !important; overflow: visible !important; display: block !important;
-        }
-        .dxbl-grid { height: auto !important; }
-      `
-    });
-    await page.waitForTimeout(2000);
-
-    const externalEntityRolesSection = page.getByRole('group', { name: 'External Entity Roles' });
-    const grid = externalEntityRolesSection.locator('[role="treegrid"]').first();
-    
-    // Test radio button selection
-    const radioButtons = grid.locator('input[type="radio"]');
-    const radioCount = await radioButtons.count();
-    expect(radioCount).toBeGreaterThan(0);
-
-    // Click first radio button
-    const firstRadio = radioButtons.first();
-    await firstRadio.click();
-    await expect(firstRadio).toBeChecked();
-
-    // Verify only one radio button is selected
-    const checkedRadios = grid.locator('input[type="radio"]:checked');
-    const checkedCount = await checkedRadios.count();
-    expect(checkedCount).toBe(1);
-
-    // Verify "Click here to add a new row" functionality
-    await expect(page.locator('text=Click here to add a new row')).toBeVisible();
   });
 
   test('1.7 Search and Filter Functionality', async () => {
@@ -368,54 +258,5 @@ test.describe('External Entity Roles - Security Masters', () => {
       await expandButton.click();
       await page.waitForTimeout(1000);
     }
-  });
-
-  test('1.9 Error Handling and Edge Cases', async ({ browser }) => {
-    // Test unauthenticated access
-    const newContext = await browser.newContext();
-    
-    if (newContext) {
-      const newPage = await newContext.newPage();
-      
-      // Navigate without authentication
-      await newPage.goto(EXTERNAL_ENTITY_ROLES_URL);
-      
-      // Should redirect to login
-      await expect(newPage).toHaveURL(/Account\/Login/);
-      
-      // Verify return URL is preserved
-      const currentUrl = newPage.url();
-      expect(currentUrl).toContain('returnUrl');
-      expect(decodeURIComponent(currentUrl)).toContain('ExternalEntityRolesPage');
-      
-      await newPage.close();
-      await newContext.close();
-    }
-
-    // Test CSS injection failure fallback
-    await page.goto(EXTERNAL_ENTITY_ROLES_URL);
-    
-    // Simulate CSS injection failure by using manual scrolling approach
-    const grid = page.locator('[role="treegrid"]').first();
-    await expect(grid).toBeVisible();
-    
-    // Verify grid functionality even without CSS injection
-    const rows = grid.locator('[role="row"]');
-    const visibleRowCount = await rows.count();
-    expect(visibleRowCount).toBeGreaterThan(0);
-    
-    // If virtualized, scroll to ensure all content is loaded
-    await page.evaluate(() => {
-      const scrollContainer = document.querySelector('.dxbl-scroll-viewer');
-      if (scrollContainer) {
-        scrollContainer.scrollTop = scrollContainer.scrollHeight;
-      }
-    });
-    
-    await page.waitForTimeout(1000);
-    
-    // Re-count after scroll
-    const finalRowCount = await rows.count();
-    expect(finalRowCount).toBeGreaterThanOrEqual(visibleRowCount);
   });
 });

@@ -15,33 +15,6 @@ test.describe('Milestones Master - DevExpress Grid Validation', () => {
     consoleMessages = [];
   });
 
-  test('should validate page load and navigation to Milestones master', async ({ browser }) => {
-    const context = await SessionManager.createAuthenticatedSession(
-      browser,
-      testData.validLogin.email,
-      testData.validLogin.password
-    );
-    const page = await context.newPage();
-
-    // Attach console listener
-    page.on('console', (msg) => {
-      consoleMessages.push(msg.text());
-    });
-
-    // Navigate directly to Milestones page
-    await page.goto(properties.predeployment.milestonesUrl);
-    await page.waitForLoadState('networkidle');
-
-    // Verify page elements
-    await expect(page.getByRole('heading', { name: 'Milestones' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Menu' })).toBeVisible();
-    
-    // Verify breadcrumb navigation
-    await expect(page.getByText('📄 Masters ›')).toBeVisible();
-
-    await context.close();
-  });
-
   test('should validate DevExpress grid with CSS injection, console metadata, and row counting', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,

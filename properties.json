@@ -5,6 +5,7 @@
   "predeployment": {
     "loginUrl": "https://identity.algorithms.com/Account/Login?returnUrl=https%3A%2F%2Fcoremasters.algorithms.com%2F",
     "appUrl": "https://coremasters.algorithms.com/",
+    "companyTrialUrl": "https://coremasters.algorithms.com/CompanyTrial?stepType=Master&stepCode=COMPANY&processCode=Masters",
     "milestonesUrl": "https://coremasters.algorithms.com/ENQMILESTONE?stepType=Master&stepCode=ENQMILESTONE&processCode=Masters",
     "approvalRegionUrl": "https://coremasters.algorithms.com/ApprovalRegionPage/?stepType=Master&stepCode=APPROVALREGION&processCode=SECURITY",
     "currencyPageUrl": "https://coremasters.algorithms.com/CurrencyPage?stepType=Master&stepCode=CURRENCYEXRATE&processCode=Masters",

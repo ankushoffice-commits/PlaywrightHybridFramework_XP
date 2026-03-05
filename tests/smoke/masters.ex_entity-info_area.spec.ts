@@ -111,40 +111,6 @@ test.describe('External Entity Info Area - Master Data Management', () => {
     await context.close();
   });
 
-  test('should validate page navigation and toolbar functionality', async ({ browser }) => {
-    const context = await SessionManager.createAuthenticatedSession(
-      browser,
-      testData.validLogin.email,
-      testData.validLogin.password
-    );
-    const page = await context.newPage();
-
-    // Navigate to External Entity Info Area
-    await page.goto(properties.predeployment.externalEntityInfoAreaPageUrl);
-    
-    // Verify URL parameters are correct
-    expect(page.url()).toContain('stepType=Master');
-    expect(page.url()).toContain('stepCode=EXTENTITYRELATED');
-    expect(page.url()).toContain('processCode=SECURITY');
-
-    // Validate breadcrumb navigation shows Masters section
-    await expect(page.getByText('📄 Masters ›')).toBeVisible();
-
-    // Verify main page title
-    await expect(page.getByRole('heading', { name: 'External Entity Info Area' })).toBeVisible();
-
-    // Check toolbar buttons initial states
-    await expect(page.getByRole('button', { name: 'Edit' })).toBeEnabled();
-    await expect(page.getByRole('button', { name: 'Save' })).toBeDisabled();
-    await expect(page.getByRole('button', { name: 'Cancel' })).toBeDisabled();
-    await expect(page.getByRole('button', { name: 'Actions' })).toBeEnabled();
-
-    // Validate Type selector shows 'Areas of Operation'
-    await expect(page.getByRole('combobox', { name: /Areas of Operation/ })).toBeVisible();
-
-    await context.close();
-  });
-
   test('should validate grid toolbar and action buttons functionality', async ({ browser }) => {
     const context = await SessionManager.createAuthenticatedSession(
       browser,

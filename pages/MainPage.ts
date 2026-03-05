@@ -23,7 +23,9 @@ export class MainPage {
 
   async openMenu() {
     await this.page.locator('body').click(); // Close any open panels
-    await this.page.getByRole('button', { name: 'Menu' }).click();
+    // Try multiple selectors for the menu button
+    const menuButton = this.page.locator('[aria-label="Hide or show side menu"], [title="Hide or show side menu"], .menu-button, [role="button"]:has-text("Menu")').first();
+    await menuButton.click();
   }
 
   async navigateToMasters() {
